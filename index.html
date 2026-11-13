@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SÉCURITÉ : Politique de Référent et Protection MIME -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- SÉCURITÉ : Content Security Policy (CSP) adaptée pour GitHub Pages -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline';
+        style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' https://placehold.co data:;
+        connect-src 'self';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'none';
+        upgrade-insecure-requests;
+    ">
+
+    <title>MV3D | L'Atelier de Mathis — Sculptures, Statues & Enseignes 3D Sur-Mesure</title>
+    
+    <!-- Note Cyber : En production finale, remplace ce CDN par un fichier CSS compilé en local -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            bg: '#F5F5F7',
+                            text: '#1D1D1F',
+                            textMuted: '#86868B',
+                            card: '#FFFFFF',
+                            accent: '#0071E3',
+                            accentHover: '#0077ED'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'apple': '0 4px 24px rgba(0, 0, 0, 0.04)',
+                        'apple-hover': '0 12px 32px rgba(0, 0, 0, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background-color: #F5F5F7; 
+            color: #1D1D1F; 
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .display-text {
+            letter-spacing: -0.025em;
+            line-height: 1.08;
+        }
+        .body-text {
+            letter-spacing: 0.01em;
+            line-height: 1.6;
+        }
+
+        .material-glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .btn-press {
+            transition: transform 100ms ease-out, background-color 200ms ease;
+        }
+        .btn-press:active {
+            transform: scale(0.96);
+        }
+        
+        .card-spring {
+            transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 400ms ease;
+        }
+        .card-spring:hover {
+            transform: translateY(-4px);
+        }
+
+        @keyframes letterFly {
+            0% {
+                transform: scale(0.6) translateY(40px) rotate(0deg);
+                opacity: 0;
+            }
+            25% {
+                transform: scale(1) translateY(0) rotate(-6deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05) translateY(-10px) rotate(-3deg);
+            }
+            100% {
+                transform: scale(0.2) translate(350px, -600px) rotate(-25deg);
+                opacity: 0;
+            }
+        }
+
+        .animate-flying-letter {
+            animation: letterFly 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .btn-press, .card-spring {
+                transition: opacity 200ms ease;
+                transform: none !important;
+            }
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #F5F5F7; }
+        ::-webkit-scrollbar-thumb { background: #D2D2D7; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #86868B; }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-apple-accent selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="material-glass sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="bg-apple-text text-white font-bold px-3.5 py-1.5 rounded-lg text-sm tracking-tight">MV3D</div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-semibold tracking-tight">L'Atelier Créatif Grand Format</h1>
+                    <span class="text-[11px] font-medium text-apple-textMuted uppercase tracking-wider block">Par Mathis · Créations 3D sur-mesure</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="#atelier" class="hidden md:inline-block text-sm font-medium text-apple-textMuted hover:text-apple-text px-3 py-2 transition-colors">
+                    Qui suis-je ?
+                </a>
+                <!-- SÉCURITÉ : Lien WhatsApp protégé contre le scraping via data-wa-msg -->
+                <a href="#contact" data-wa-msg="Salut Mathis (MV3D), j'ai une idée de projet 3D et j'aimerais en discuter avec toi." class="wa-trigger btn-press bg-apple-accent hover:bg-apple-accentHover text-white font-medium text-sm px-5 py-2.5 rounded-full shadow-sm">
+                    Me parler de votre idée
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 sm:py-28 px-4 text-center">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <h2 class="display-text text-4xl sm:text-6xl lg:text-7xl font-bold text-apple-text mb-6">
+                Vos idées méritent de prendre vie en grand.
+            </h2>
+            <p class="body-text text-lg sm:text-xl text-apple-textMuted max-w-2xl mx-auto mb-10">
+                Que vous vouliez le logo géant de votre boîte sur le mur d'accueil, une statue unique pour votre intérieur ou une mascotte qui attire tous les regards : je les modélise, les imprime et les peins à la main dans mon atelier.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 pt-2">
+                <a href="#contact" data-wa-msg="Salut Mathis, j'aimerais voir ce que donnerait mon projet en 3D !" class="wa-trigger btn-press bg-apple-text text-white font-medium px-7 py-3.5 rounded-full text-sm shadow-sm">
+                    Voir mon projet en 3D (Aperçu gratuit)
+                </a>
+                <a href="#catalogue" class="btn-press bg-apple-text/5 hover:bg-apple-text/10 text-apple-text font-medium px-7 py-3.5 rounded-full text-sm">
+                    Voir ce que je fabrique
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Catalogue Section -->
+    <main id="catalogue" class="max-w-7xl mx-auto px-4 py-12 space-y-24">
+
+        <!-- Category 1: Logos & Enseignes -->
+        <section class="space-y-10">
+            <div class="border-b border-gray-200 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                <div>
+                    <h3 class="display-text text-2xl sm:text-3xl font-bold">Logos 3D & Enseignes qui marquent</h3>
+                    <span class="text-sm font-medium text-apple-textMuted mt-1 block">Pour votre boutique, restaurant, salon, salle de sport ou bureau</span>
+                </div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-apple-accent">Fait sur-mesure pour votre mur</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-spring bg-apple-card rounded-[2rem] shadow-apple hover:shadow-apple-hover overflow-hidden flex flex-col">
+                    <div class="relative h-72 sm:h-80 bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/800x600/F5F5F7/1D1D1F?text=MV3D+%7C+Mascotte+%26+Personnage" alt="Enseigne 3D Murale MV3D" loading="lazy" data-fallback="https://placehold.co/800x600/F5F5F7/1D1D1F?text=MV3D+Logo+3D" class="img-safe w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full text-apple-text shadow-sm">
+                            Pour vos murs intérieurs
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-3 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h4 class="text-xl font-semibold">Votre logo en vrai relief 3D</h4>
+                            <p class="body-text text-apple-textMuted text-sm">
+                                Fini les autocollants plats. Imaginez le logo de votre entreprise qui ressort du mur derrière votre comptoir ou dans vos vidéos, avec une finition lisse, métallisée ou un éclairage LED à l'arrière.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex justify-between items-center text-xs font-medium text-apple-textMuted">
+                            <span>Super facile à poser (gabarit fourni)</span>
+                            <span class="text-apple-text font-semibold">Rendu ultra-propre</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-spring bg-apple-card rounded-[2rem] shadow-apple hover:shadow-apple-hover overflow-hidden flex flex-col">
+                    <div class="relative h-72 sm:h-80 bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/800x600/F5F5F7/1D1D1F?text=MV3D+%7C+Mascotte+%26+Personnage" alt="Enseigne Extérieure MV3D" loading="lazy" data-fallback="https://placehold.co/800x600/F5F5F7/1D1D1F?text=MV3D+Enseigne" class="img-safe w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full text-apple-text shadow-sm">
+                            Intérieur & Extérieur
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-3 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h4 class="text-xl font-semibold">Lettres géantes & Enseignes de façade</h4>
+                            <p class="body-text text-apple-textMuted text-sm">
+                                Pour que l'on repère votre commerce de loin. Je fabrique vos lettres en grand format avec des matériaux solides qui ne bougent pas face au soleil, à la pluie ou au gel.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex justify-between items-center text-xs font-medium text-apple-textMuted">
+                            <span>Résiste au soleil et à la pluie</span>
+                            <span class="text-apple-text font-semibold">Toutes tailles possibles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 2: Statues & Personnages Géants -->
+        <section class="space-y-10">
+            <div class="border-b border-gray-200 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                <div>
+                    <h3 class="display-text text-2xl sm:text-3xl font-bold">Statues, Sculptures & Effigies</h3>
+                    <span class="text-sm font-medium text-apple-textMuted mt-1 block">La pièce maîtresse que tout le monde va regarder (et prendre en photo)</span>
+                </div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-apple-accent">Pièces uniques peintes à la main</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-spring bg-apple-card rounded-[2rem] shadow-apple hover:shadow-apple-hover overflow-hidden flex flex-col">
+                    <div class="relative h-72 sm:h-80 bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/800x600/F5F5F7/1D1D1F?text=MV3D+%7C+Mascotte+%26+Personnage" alt="Mascotte 3D MV3D" loading="lazy" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full text-apple-text shadow-sm">
+                            Effet "Waouh" garanti
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-4 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h4 class="text-xl font-semibold">Mascotte géante & Personnage taille réelle</h4>
+                            <p class="body-text text-apple-textMuted text-sm">
+                                Vous avez un personnage fétiche, une mascotte d'entreprise ou une idée un peu folle ? Je lui donne vie en grand format (80 cm, 1m20 ou plus), poncé et peint exactement à vos couleurs.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex justify-between items-center text-xs font-medium text-apple-textMuted">
+                            <span>Peinture pro & vernis de protection</span>
+                            <span class="text-apple-text font-semibold">100 % personnalisé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-spring bg-apple-card rounded-[2rem] shadow-apple hover:shadow-apple-hover overflow-hidden flex flex-col">
+                    <div class="relative h-72 sm:h-80 bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/800x600/F5F5F7/1D1D1F?text=MV3D+%7C+Sculpture+%26+Art" alt="Sculpture 3D MV3D" loading="lazy" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full text-apple-text shadow-sm">
+                            Déco, Art & Événements
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-4 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h4 class="text-xl font-semibold">Sculptures design, Bustes & Trophées</h4>
+                            <p class="body-text text-apple-textMuted text-sm">
+                                Pour habiller un salon, un hall d'entrée, un showroom auto ou remettre un trophée hors norme lors d'un événement. On part d'une simple photo ou d'un croquis pour créer votre sculpture.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex justify-between items-center text-xs font-medium text-apple-textMuted">
+                            <span>Socle sur-mesure inclus</span>
+                            <span class="text-apple-text font-semibold">Pièce unique ou petite série</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 3: Présentoirs & Décor sur-mesure -->
+        <section class="space-y-10">
+            <div class="border-b border-gray-200 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                <div>
+                    <h3 class="display-text text-2xl sm:text-3xl font-bold">Présentoirs & Décors sur-mesure</h3>
+                    <span class="text-sm font-medium text-apple-textMuted mt-1 block">Mettez vos produits en valeur comme nulle part ailleurs</span>
+                </div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-apple-accent">Boutiques, Salons & Créateurs</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-spring bg-apple-card rounded-[2rem] shadow-apple hover:shadow-apple-hover overflow-hidden flex flex-col">
+                    <div class="relative h-72 sm:h-80 bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/800x600/F5F5F7/1D1D1F?text=MV3D+%7C+Presentoir+Sur-Mesure" alt="Présentoir MV3D" loading="lazy" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full text-apple-text shadow-sm">
+                            Mise en valeur produit
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-3">
+                        <h4 class="text-xl font-semibold">Socles & Présentoirs originaux</h4>
+                        <p class="body-text text-apple-textMuted text-sm">
+                            Vous vendez des parfums, des montres, des sneakers ou des créations artisanales ? Je vous crée un socle sculpté sur-mesure qui attire immédiatement l'œil sur votre produit phare en vitrine.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-spring bg-apple-card rounded-[2rem] shadow-apple hover:shadow-apple-hover overflow-hidden flex flex-col">
+                    <div class="relative h-72 sm:h-80 bg-gray-100 overflow-hidden">
+                        <img src="https://placehold.co/800x600/F5F5F7/1D1D1F?text=MV3D+%7C+Totem+%26+QR+Code" alt="Totem Publicitaire MV3D" loading="lazy" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full text-apple-text shadow-sm">
+                            Comptoir & Accueil
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-3">
+                        <h4 class="text-xl font-semibold">Totems de comptoir & Supports connectés</h4>
+                        <p class="body-text text-apple-textMuted text-sm">
+                            Un bel objet en 3D posé sur votre comptoir ou à l'entrée avec votre logo en relief (avec possibilité d'intégrer votre QR Code Instagram, Google Avis ou menu directement dans la sculpture).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Humaine : L'Atelier -->
+        <section id="atelier" class="bg-apple-card rounded-[2rem] shadow-apple p-10 sm:p-16 space-y-12 my-12">
+            <div class="max-w-3xl mx-auto text-center space-y-4">
+                <h3 class="display-text text-2xl sm:text-4xl font-bold">Comment on donne vie à votre projet ?</h3>
+                <p class="body-text text-apple-textMuted text-base sm:text-lg">
+                    Chez MV3D, vous ne parlez pas à un robot ni à un commercial. Je m'appelle Mathis, et je vous accompagne personnellement du premier croquis jusqu'à la pièce finie.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-4">
+                <div class="space-y-4 text-center sm:text-left bg-apple-bg/60 p-6 rounded-2xl">
+                    <div class="w-10 h-10 rounded-full bg-apple-text text-white flex items-center justify-center font-semibold mx-auto sm:mx-0 text-sm">1</div>
+                    <h4 class="font-semibold text-lg">Vous m'envoyez votre idée</h4>
+                    <p class="body-text text-apple-textMuted text-sm">
+                        Une photo de votre mur, le logo de votre boîte ou même un simple dessin sur papier. Je vous fais une simulation 3D sous 24h pour que vous voyiez exactement le rendu avant de vous décider.
+                    </p>
+                </div>
+                <div class="space-y-4 text-center sm:text-left bg-apple-bg/60 p-6 rounded-2xl">
+                    <div class="w-10 h-10 rounded-full bg-apple-text text-white flex items-center justify-center font-semibold mx-auto sm:mx-0 text-sm">2</div>
+                    <h4 class="font-semibold text-lg">Je fabrique & je vous montre</h4>
+                    <p class="body-text text-apple-textMuted text-sm">
+                        J'imprime en grand format, j'assemble, je ponce et je peins votre pièce à l'atelier. Je vous envoie des photos et vidéos sur WhatsApp à chaque étape pour que vous suiviez la naissance de votre pièce.
+                    </p>
+                </div>
+                <div class="space-y-4 text-center sm:text-left bg-apple-bg/60 p-6 rounded-2xl">
+                    <div class="w-10 h-10 rounded-full bg-apple-text text-white flex items-center justify-center font-semibold mx-auto sm:mx-0 text-sm">3</div>
+                    <h4 class="font-semibold text-lg">Prêt à poser chez vous</h4>
+                    <p class="body-text text-apple-textMuted text-sm">
+                        Je vous remets ou vous expédie la pièce ultra-protégée avec ses fixations et son patron de pose. Vous n'avez plus qu'à l'installer et profiter de la réaction de vos clients (ou de vos proches).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Contact Section -->
+        <section id="contact" class="bg-[#FBFBFD] border border-gray-200 rounded-[2rem] p-10 sm:p-20 text-center space-y-8">
+            <div class="space-y-4">
+                <h3 class="display-text text-3xl sm:text-5xl font-bold tracking-tight">
+                    On teste votre idée en 3D ?
+                </h3>
+                <p class="body-text text-apple-textMuted text-lg max-w-2xl mx-auto">
+                    Envoyez-moi un petit message sur WhatsApp avec votre logo, une photo de votre espace ou votre idée de statue. C'est gratuit, sans engagement, et je vous réponds personnellement dans la journée.
+                </p>
+            </div>
+            <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" data-wa-msg="Salut Mathis (MV3D), j'ai une idée de projet (enseigne / statue) et j'aimerais bien voir ce que ça donnerait en 3D !" class="wa-trigger btn-press bg-apple-accent hover:bg-apple-accentHover text-white font-medium px-8 py-4 rounded-full text-base shadow-sm">
+                    Écrire à Mathis sur WhatsApp
+                </a>
+                <!-- SÉCURITÉ : Suppression de onclick inline -->
+                <button id="share-btn" type="button" class="btn-press bg-apple-text hover:bg-apple-text/90 text-white font-medium px-8 py-4 rounded-full text-base flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                        <polyline points="16 6 12 2 8 6"/>
+                        <line x1="12" y1="2" x2="12" y2="15"/>
+                    </svg>
+                    Partager la page
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 mt-24 py-12 text-center text-sm text-apple-textMuted">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="font-semibold text-apple-text tracking-tight">MV3D — L'Atelier de Mathis & Valentin</p>
+            <p>© 2026 MV3D — Créations 3D Grand Format & Sur-Mesure.</p>
+        </div>
+    </footer>
+
+    <!-- Overlay Plein Écran : Animation de la lettre -->
+    <div id="full-page-animation" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/40 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="flying-letter" class="relative">
+            <div class="w-24 h-16 sm:w-28 sm:h-20 bg-white rounded-xl shadow-2xl flex items-center justify-center border border-gray-100 text-apple-accent">
+                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+            </div>
+            <div class="absolute -bottom-4 -left-6 w-12 h-1 bg-white/40 rounded-full blur-[1px]"></div>
+        </div>
+
+        <p id="animation-text" class="text-white font-medium text-lg mt-8 tracking-wide drop-shadow-sm opacity-0 transition-opacity duration-300">
+            Lien MV3D copié & prêt à être partagé !
+        </p>
+    </div>
+
+    <script>
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Anti-Scraping : Reconstruction du lien WhatsApp au clic uniquement
+        // "MzM3NjM2Mjg1MzQ=" est la version encodée en Base64 de ton numéro
+        const encodedPhone = 'MzM3NjM2Mjg1MzQ=';
+        document.querySelectorAll('.wa-trigger').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const phone = atob(encodedPhone);
+                const msg = encodeURIComponent(btn.getAttribute('data-wa-msg') || '');
+                window.open(`https://wa.me/${phone}?text=${msg}`, '_blank', 'noopener,noreferrer');
+            });
+        });
+
+        // 2. Gestion sécurisée du fallback d'images (remplace les onerror inline)
+        document.querySelectorAll('.img-safe').forEach(img => {
+            img.addEventListener('error', function() {
+                const fallback = this.getAttribute('data-fallback');
+                if (fallback && this.src !== fallback) {
+                    this.src = fallback;
+                }
+            }, { once: true });
+        });
+
+        // 3. Attachement propre du bouton de partage
+        const shareBtn = document.getElementById('share-btn');
+        if (shareBtn) {
+            shareBtn.addEventListener('click', partagerPage);
+        }
+    });
+
+    function lancerAnimationLettre() {
+        const overlay = document.getElementById('full-page-animation');
+        const letter = document.getElementById('flying-letter');
+        const text = document.getElementById('animation-text');
+
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        overlay.classList.add('opacity-100');
+        letter.classList.add('animate-flying-letter');
+
+        setTimeout(() => {
+            text.classList.remove('opacity-0');
+            text.classList.add('opacity-100');
+        }, 200);
+
+        setTimeout(() => {
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            text.classList.remove('opacity-100');
+            text.classList.add('opacity-0');
+            letter.classList.remove('animate-flying-letter');
+        }, 1800);
+    }
+
+    async function partagerPage() {
+        const url = window.location.href;
+        const title = document.title;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({ title, url });
+                return;
+            } catch (err) {
+                if (err.name === 'AbortError') return;
+            }
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            try {
+                await navigator.clipboard.writeText(url);
+                lancerAnimationLettre();
+            } catch {
+                copieManuelle(url);
+            }
+        } else {
+            copieManuelle(url);
+        }
+    }
+
+    function copieManuelle(texte) {
+        const zone = document.createElement('textarea');
+        zone.value = texte;
+        zone.setAttribute('readonly', '');
+        zone.style.position = 'fixed';
+        zone.style.opacity = '0';
+        document.body.appendChild(zone);
+        zone.focus();
+        zone.select();
+
+        try {
+            document.execCommand('copy');
+            lancerAnimationLettre();
+        } catch (e) {
+            console.error('Erreur de copie', e);
+        }
+
+        document.body.removeChild(zone);
+    }
+    </script>
+</body>
+</html>
